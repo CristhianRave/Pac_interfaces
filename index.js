@@ -3,16 +3,21 @@ $(function () {
 
   /* Ancho de la ventana */
   var windowWidth = $(window).width();
-  console.log(windowWidth);
 
   /* Tamaño del coche */
   var carWidth = $(".car").width();
 
   /* Longitud de la pista */
-  var raceLenght = windowWidth - carWidth * 2;;
+  var raceLenght = windowWidth - carWidth * 2;
 
   /* Meta final */
-  var finalRace = raceLenght - carWidth;
+  var finalRace = raceLenght - carWidth * 2;
+
+  var speedsCars = [{}];
+  var car;
+  var moveCar;
+  var speedCar = {};
+  var speedRandom;
 
   /* Array con las imgs de los coches */
   var coches = [
@@ -27,13 +32,13 @@ $(function () {
     $("#rail9").hide(),
   ];
 
+  function random(min, max) {
+    var speed = Math.floor(Math.random() * (max - min + 1) + min);
+    return speed;
+  }
+
   /* Boton inicio carrera */
   $(".btn-start").on("click", function () {
-    var speedsCars = [{}];
-    var car;
-    var moveCar;
-    var speedCar = {};
-
     $(".btn-start").hide();
     $(".btn-restart").show();
 
@@ -41,11 +46,10 @@ $(function () {
     var option = $("#players option:selected").val();
 
     /* cantidad de coches a mostrar  */
-    for (let index = 0; index < option; index++) {
 
+    for (let index = 0; index < option; index++) {
       /* Valor random de la velocidad de los coches */
-      var speed = Math.random() * (10 - 1) + 1; //cambiar valor
-      var speedRace = Math.round(speed) * 1000;
+      speedRandom = random(1, 10); //cambiar valor
 
       car = coches[index];
       car.show();
@@ -53,44 +57,39 @@ $(function () {
       /* Animacion de los coches */
       moveCar = $("#car" + (index + 1)).animate(
         { left: raceLenght },
-        speedRace
+        speedRandom * 1001 /* ,
+        function () {
+          $(this).after(tablePositions());
+        } */
       );
-      console.log(raceLenght);
 
       /* Agregar coche y su velocidad al array */
-      speedCar = { moveCar, speedRace };
+      speedCar = { moveCar, speedRandom };
       speedsCars.push(speedCar);
     }
+
     /* Eliminar el primer elemento de el array */
     speedsCars.shift();
-    
-    /* Orden de llegada de los coches  */
-    speedsCars.sort((a, b) => (a.speedRace > b.speedRace ? 1 : -1));
-    console.log(speedsCars);
-    var key;
-    for (key in speedsCars) {
-      if (key == 0) {
-        key = "primero";
-      } else if (key == 1) {
-        key = "segundo";
-      } else if (key == 2) {
-        key = "tercero";
-      } else if (key == 3) {
-        key = "cuarto";
-      } else if (key == 4) {
-        key = "quinto";
-      } else if (key == 5) {
-        key = "sexto";
-      } else if (key == 6) {
-        key = "septimo";
-      } else if (key == 7) {
-        key = "octavo";
-      } else if (key == 8) {
-        key = "noveno";
-      }
-      console.log(key);
-    }
 
+    /* Ordenar por llegada de los coches  */
+    speedsCars.sort((a, b) => (a.speedRandom > b.speedRandom ? 1 : -1));
+
+    /* tabla de posiciones */
+
+    var keys = Object.keys(speedsCars);
+    
+    for (let i = 0; i < keys.length; i++) {
+      
+      var value = speedsCars[i];
+
+      var d = value.moveCar[0].alt;
+
+        //-----------------------------------------------------;
+        var tr = "<tr><td>" + (i+1 )+ "</td><td>" + d + "</td></tr>";
+        var tableBody = $("table tbody");
+        tableBody.append(tr);
+      }
+    
   });
 
   $(".btn-restart").on("click", function () {
