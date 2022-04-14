@@ -1,3 +1,10 @@
+.container {
+  width: 100%;
+}
+.container-race {
+  display: flex;
+}
+
 .menu {
   text-align: center;
   justify-content: center;
@@ -41,14 +48,17 @@
 }
 
 .track {
-  width: 100%;
+  width: 80%;
   background-color: gray;
   height: 100%;
   border: 1px solid black;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
 .rail {
-  width: 100%;
+  width: 99%;
   height: 70px;
   margin: 10px 0;
   background-color: rgba(255, 166, 0, 0.575);
@@ -74,4 +84,22 @@
 
 .car {
   margin-left: 0;
+}
+
+table {
+  margin-left:20px;
+}
+
+table th,td{
+  font-size: 36px;
+  padding: 0 10px;
+  background-color:#2fa9a9;
+
+}
+
+table td {
+  font-size: 26px;
+  text-align: center;
+  padding: 2px 0;
+  background-color: gainsboro;
 }

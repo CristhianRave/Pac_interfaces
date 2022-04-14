@@ -1,26 +1,11 @@
 $(function () {
   $(".btn-restart").hide();
-
-  /* Ancho de la ventana */
-  var windowWidth = $(window).width();
-
-  /* Tamaño del coche */
-  var carWidth = $(".car").width();
-
-  /* Longitud de la pista */
-  var raceLenght = windowWidth - carWidth * 2;
-
-  /* Meta final */
-  var finalRace = raceLenght - carWidth * 2;
-
+  $("table").hide();
   var speedsCars = [{}];
-  var car;
-  var moveCar;
-  var speedCar = {};
-  var speedRandom;
+  var carFinish = 0;
 
-  /* Array con las imgs de los coches */
-  var coches = [
+  /* Array con las imgs de los coches y la pista */
+  var cars = [
     $("#rail1").hide(),
     $("#rail2").hide(),
     $("#rail3").hide(),
@@ -32,69 +17,90 @@ $(function () {
     $("#rail9").hide(),
   ];
 
+  //-----------------------------------------------------;
+
+  /* Boton inicio carrera */
+  $(".btn-start").on("click", function () {
+    /* cantidad de jugadores seleccionados */
+    var option = $("#players option:selected").val();
+
+    $(".btn-start").hide();
+    $(".btn-restart").show();
+
+    carProperties(option, speedsCars);
+    tablePositions(speedsCars);
+  });
+
+  //-----------------------------------------------------;
+
   function random(min, max) {
     var speed = Math.floor(Math.random() * (max - min + 1) + min);
     return speed;
   }
+  //-----------------------------------------------------;
 
-  /* Boton inicio carrera */
-  $(".btn-start").on("click", function () {
-    $(".btn-start").hide();
-    $(".btn-restart").show();
-
-    /* cantidad de jugadores seleccionados por pantalla */
-    var option = $("#players option:selected").val();
-
-    /* cantidad de coches a mostrar  */
+  /* Propiedades de los coches y la pista*/
+  function carProperties(option) {
+    var windowWidth = $(".track").width();
+    var finalRace = windowWidth - $(".car").width() * 2;
 
     for (let index = 0; index < option; index++) {
-      /* Valor random de la velocidad de los coches */
-      speedRandom = random(1, 10); //cambiar valor
+      var speedRandom = random(1, 10); //cambiar valor
 
-      car = coches[index];
+      var car = cars[index];
       car.show();
 
       /* Animacion de los coches */
-      moveCar = $("#car" + (index + 1)).animate(
-        { left: raceLenght },
-        speedRandom * 1001 /* ,
-        function () {
-          $(this).after(tablePositions());
-        } */
-      );
+      var animateCar = $("#car" + (index + 1)).animate(
+        { left: finalRace },
+        {
+          duration: speedRandom * 1001,
+          complete: function () {
+            carFinish += 1;
 
-      /* Agregar coche y su velocidad al array */
-      speedCar = { moveCar, speedRandom };
+            if (option == carFinish) {
+              $("table").show();
+              carFinish = 0;
+            }
+          },
+        }
+      );
+      /* Agregar coche/velocidad al array */
+      var speedCar = { animateCar, speedRandom };
       speedsCars.push(speedCar);
     }
 
-    /* Eliminar el primer elemento de el array */
-    speedsCars.shift();
-
-    /* Ordenar por llegada de los coches  */
+    /* Ordenar por llegada */
     speedsCars.sort((a, b) => (a.speedRandom > b.speedRandom ? 1 : -1));
+  }
 
-    /* tabla de posiciones */
+  //-----------------------------------------------------;
 
-    var keys = Object.keys(speedsCars);
-    
-    for (let i = 0; i < keys.length; i++) {
-      
+  /* tabla de posiciones */
+  function tablePositions(speedsCars) {
+    for (let i = 0; i < speedsCars.length; i++) {
       var value = speedsCars[i];
+      var nameCar = value.animateCar[0].alt;
 
-      var d = value.moveCar[0].alt;
+      /* Crear filas en tabla posiciones */
+      $("#tbody-car").append(
+        "<tr id='tr-coche'><td>" +
+          (i + 1) +
+          "</td><td>" +
+          nameCar +
+          "</td></tr>"
+      );
+    }
+  }
 
-        //-----------------------------------------------------;
-        var tr = "<tr><td>" + (i+1 )+ "</td><td>" + d + "</td></tr>";
-        var tableBody = $("table tbody");
-        tableBody.append(tr);
-      }
-    
-  });
-
+  //-----------------------------------------------------;
+  /* Boton de reinicio */
   $(".btn-restart").on("click", function () {
+    speedsCars.length = 0;
     $(".btn-restart").hide();
     $(".btn-start").show();
-    $(".car").css("left", "0");
+    $(".car").clearQueue().stop().css("left", "0");
+    $("table").hide();
+    $("#tbody-car").empty();
   });
 });
