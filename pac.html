@@ -14,62 +14,109 @@
 <body>
 
     <div class="container">
-        <div class="menu">
+        <header>
+            <div class="menu">
+                <h1>Carreras de coches</h1>
+                <h2>Selecciona participantes:</h2>
+                <select id="players">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                </select>
+                <div class="buttons">
+                    <button class="btn-start">Empezar</button>
+                    <button class="btn-restart">Reiniciar</button>
+                </div>
+            </div>
+            <div id="win">
+                
+            </div>
+        </header>
 
-            <h1>Carreras de coches</h1>
-            <h2>Selecciona participantes:</h2>
 
-            <select id="players">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-            </select>
-        </div>
-        
-        <div class="buttons">
-            <button class="btn-start">Empezar</button>
-            <button class="btn-restart">Reiniciar</button>
-        </div>
-        
+
         <div class="container-race">
             <div class="track">
-                <div class="rail" id="rail1">
-                    <div><img class="car" id="car1" src="img/car1.png" alt="coche1"></div>
+
+                <div class="prueba" id="rail1">
+                    <div class="rail">
+                        <img class="car" id="car1" src="img/car1.png" alt="coche1">
+                    </div>
+                    <img class="finish" id="finish" src="img/finish.jpg" alt="finish">
                 </div>
-                <div class="rail" id="rail2">
-                    <div><img class="car" id="car2" src="img/car2.png" alt="coche2"></div>
+
+                <div class="prueba" id="rail2">
+                    <div class="rail">
+                        <img class="car" id="car2" src="img/car2.png" alt="coche2">
+                    </div>
+                    <img class="finish" id="finish" src="img/finish.jpg" alt="finish">
                 </div>
-                <div class="rail" id="rail3">
-                    <div><img class="car" id="car3" src="img/car3.png" alt="coche3"></div>
+                <div class="prueba" id="rail3">
+
+                    <div class="rail">
+                        <img class="car" id="car3" src="img/car3.png" alt="coche3">
+                    </div>
+                    <img class="finish" id="finish" src="img/finish.jpg" alt="finish">
                 </div>
-                <div class="rail" id="rail4">
-                    <div><img class="car" id="car4" src="img/car4.png" alt="coche4"></div>
+
+                <div class="prueba" id="rail4">
+
+                    <div class="rail">
+                        <img class="car" id="car4" src="img/car4.png" alt="coche4">
+                    </div>
+                    <img class="finish" id="finish" src="img/finish.jpg" alt="finish">
                 </div>
-                <div class="rail" id="rail5">
-                    <div><img class="car" id="car5" src="img/car5.png" alt="coche5"></div>
+                <div class="prueba" id="rail5">
+
+                    <div class="rail">
+                        <img class="car" id="car5" src="img/car5.png" alt="coche5">
+                    </div>
+                    <img class="finish" id="finish" src="img/finish.jpg" alt="finish">
                 </div>
-                <div class="rail" id="rail6">
-                    <div><img class="car" id="car6" src="img/car6.png" alt="coche6"></div>
+
+                <div class="prueba" id="rail6">
+
+                    <div class="rail">
+                        <img class="car" id="car6" src="img/car6.png" alt="coche6">
+                    </div>
+                    <img class="finish" id="finish" src="img/finish.jpg" alt="finish">
                 </div>
-                <div class="rail" id="rail7">
-                    <div><img class="car" id="car7" src="img/car7.png" alt="coche7"></div>
+
+                <div class="prueba" id="rail7">
+
+                    <div class="rail">
+                        <img class="car" id="car7" src="img/car7.png" alt="coche7">
+                    </div>
+                    <img class="finish" id="finish" src="img/finish.jpg" alt="finish">
                 </div>
-                <div class="rail" id="rail8">
-                    <div><img class="car" id="car8" src="img/car8.png" alt="coche8"></div>
+
+                <div class="prueba" id="rail8">
+
+                    <div class="rail">
+                        <img class="car" id="car8" src="img/car8.png" alt="coche8">
+                    </div>
+                    <img class="finish" id="finish" src="img/finish.jpg" alt="finish">
                 </div>
-                <div class="rail" id="rail9">
-                    <div><img class="car" id="car9" src="img/car9.png" alt="coche9"></div>
+
+                <div class="prueba" id="rail9">
+
+                    <div class="rail">
+                        <img class="car" id="car9" src="img/car9.png" alt="coche9">
+                    </div>
+                    <img class="finish" id="finish" src="img/finish.jpg" alt="finish">
                 </div>
+
+
             </div>
 
             <div class="positions">
-                <table >
+                <table>
                     <th>Posicion</th>
                     <th>Coche</th>
                     <tbody id="tbody-car">

@@ -6,6 +6,7 @@
 }
 
 .menu {
+  width: 80%;
   text-align: center;
   justify-content: center;
 }
@@ -60,7 +61,7 @@
 .rail {
   width: 99%;
   height: 70px;
-  margin: 10px 0;
+  margin: 2px 0;
   background-color: rgba(255, 166, 0, 0.575);
   border: 1px solid black;
   display: flex;
@@ -87,14 +88,14 @@
 }
 
 table {
-  margin-left:20px;
+  margin-left: 20px;
 }
 
-table th,td{
+table th,
+td {
   font-size: 36px;
   padding: 0 10px;
-  background-color:#2fa9a9;
-
+  background-color: #2fa9a9;
 }
 
 table td {
@@ -102,4 +103,34 @@ table td {
   text-align: center;
   padding: 2px 0;
   background-color: gainsboro;
+}
+
+.finish {
+  width: 7%;
+  height: 71px;
+}
+#win {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#win h1 {
+  color: rgb(146, 138, 25);
+}
+
+.prueba {
+  width: 99%;
+  display: flex;
+  align-items: center;
+}
+
+.carWin {
+  width: 25%;
+}
+
+header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }

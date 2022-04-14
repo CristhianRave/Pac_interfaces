@@ -1,6 +1,7 @@
 $(function () {
   $(".btn-restart").hide();
   $("table").hide();
+  $("#win").hide();
   var speedsCars = [{}];
   var carFinish = 0;
 
@@ -42,7 +43,7 @@ $(function () {
   /* Propiedades de los coches y la pista*/
   function carProperties(option) {
     var windowWidth = $(".track").width();
-    var finalRace = windowWidth - $(".car").width() * 2;
+    var finalRace = windowWidth - $(".car").width() * 1.4;
 
     for (let index = 0; index < option; index++) {
       var speedRandom = random(1, 10); //cambiar valor
@@ -61,6 +62,7 @@ $(function () {
             if (option == carFinish) {
               $("table").show();
               carFinish = 0;
+              $("#win").show();
             }
           },
         }
@@ -90,6 +92,17 @@ $(function () {
           nameCar +
           "</td></tr>"
       );
+      if (i == 0) {
+        $("#win").append(
+          "<h1>Ganador</h1><h1>" +
+            nameCar +
+            "</h1><img class='carWin' src=" +
+            value.animateCar[0].src +
+            ">"
+        );
+
+        console.log(value.animateCar[0]);
+      }
     }
   }
 
@@ -101,6 +114,8 @@ $(function () {
     $(".btn-start").show();
     $(".car").clearQueue().stop().css("left", "0");
     $("table").hide();
+    $("#win").hide();
     $("#tbody-car").empty();
+    $("#win").empty();
   });
 });
