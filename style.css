@@ -117,18 +117,18 @@ table td {
   width: 7%;
   height: 71px;
 }
-.c {
+.firstPosition {
   width: 20%;
 }
 
-.c h1 {
+.firstPosition h1 {
   color: rgb(146, 138, 25);
   margin: 0;
   text-shadow: 2px 2px #000000;
   text-align: center;
 }
 
-.prueba {
+.railCar {
   width: 99%;
   display: flex;
   align-items: center;

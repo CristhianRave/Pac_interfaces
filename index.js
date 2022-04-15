@@ -26,7 +26,7 @@ $(function () {
   /* Funcion de inicio carrera */
   $(".btn-start").on("click", function () {
     /* cantidad de jugadores seleccionados */
-    $(".prueba").hide();
+    $(".railCar").hide();
     $(".btn-start").hide();
     $(".btn-restart").show();
     $(".track").show();
@@ -91,10 +91,9 @@ $(function () {
   /* tabla de posiciones */
   function tablePositions(speedsCars) {
     for (let i = 0; i < speedsCars.length; i++) {
-      var value = speedsCars[i];
-      
+      var value = speedsCars[i];      
       var nameCar = value.animateCar[0].alt;
-
+      
       /* Crear filas en tabla de posiciones
       en el html */
       $("#tbody-car").append(
