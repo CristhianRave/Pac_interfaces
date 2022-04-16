@@ -4,23 +4,9 @@ $(function () {
   $("#win").hide();
   $(".track").hide();
 
-  //Declaracion de variables
+  //Declaracion de variables globales
 
   var speedsCars = [{}];
-
-  /* Imagenes de la pista y los coches 
-  creados en el html*/
-  var cars = [
-    $("#rail1").hide(),
-    $("#rail2").hide(),
-    $("#rail3").hide(),
-    $("#rail4").hide(),
-    $("#rail5").hide(),
-    $("#rail6").hide(),
-    $("#rail7").hide(),
-    $("#rail8").hide(),
-    $("#rail9").hide(),
-  ];
   //-----------------------------------------------------;
 
   /* Funcion de inicio carrera */
@@ -32,36 +18,32 @@ $(function () {
     $(".track").show();
 
     // LLamadas a funciones
-    carProperties(speedsCars);
+    carProperties();
     tablePositions(speedsCars);
   });
 
-  //-----------------------------------------------------;
-  //Funcion que genera numero random
-  function random(min, max) {
-    var speed = Math.floor(Math.random() * (max - min + 1) + min);
-    return speed;
-  }
   //-----------------------------------------------------;
 
   /* Funcion que inicializa y asigna valores y Propiedades 
   a los coches y la pista*/
   function carProperties() {
-    var windowWidth = $(".track").width();
     var carFinish = 0;
+    //participantes seleccionados 
     var option = $("#players option:selected").val();
+    var cPlayer = new Array(parseInt(option));
     var car;
 
     //Valor para linea de meta
-    var finalRace = windowWidth - $(".car").width() * 1.4;
-
+    var finalRace = $(".track").width() - $(".car").width()*1.5;
+    
     //Asignacion de velocidad, imagen y animacion al coche
     for (let index = 0; index < option; index++) {
-      var speedRandom = random(1, 10);
-      car = cars[index];
+      var speedRandom = Math.floor(Math.random() * (10 - 1 + 1) + 1);
 
+      cPlayer[index] = $("#rail" + (index + 1));
+      car = cPlayer[index];
       car.show();
-
+      
       /* Animacion */
       var animateCar = $("#car" + (index + 1)).animate(
         { left: finalRace },
@@ -69,7 +51,7 @@ $(function () {
           duration: speedRandom * 1001,
           complete: function () {
             carFinish += 1;
-            /* mostar tabla y ganador 
+            /* mostar tabla de posiciones y ganador 
             una vez esten todos en la meta */
             if (option == carFinish) {
               $("table").show("slow");
@@ -79,14 +61,14 @@ $(function () {
           },
         }
       );
-      /* Agregar coche/velocidad al array */
-      var speedCar = { animateCar, speedRandom };
-      speedsCars.push(speedCar);
+        /* Agregar coche/velocidad al array */
+        var speedCar = { animateCar, speedRandom };
+        speedsCars.push(speedCar);
+      }
+      /* Ordenar por llegada a la meta*/
+      speedsCars.sort((a, b) => (a.speedRandom > b.speedRandom ? 1 : -1));
     }
-    /* Ordenar por llegada */
-    speedsCars.sort((a, b) => (a.speedRandom > b.speedRandom ? 1 : -1));
-  }
-  //-----------------------------------------------------;
+    //-----------------------------------------------------;
 
   /* tabla de posiciones */
   function tablePositions(speedsCars) {

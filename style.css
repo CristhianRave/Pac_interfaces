@@ -76,24 +76,14 @@
   align-items: center;
 }
 
-#car1,
-#car2,
-#car3,
-#car4,
-#car5,
-#car6,
-#car7,
-#car8,
-#car9 {
+.car {
   width: 70px;
   height: 40px;
   margin-left: 0px;
   position: relative;
 }
 
-.car {
-  margin-left: 0;
-}
+
 
 table {
   margin-left: 20px;
